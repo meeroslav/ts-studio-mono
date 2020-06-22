@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "projects": {
+    "safe-and-sound": {
+      "root": "apps/safe-and-sound",
+      "sourceRoot": "apps/safe-and-sound/src",
+      "projectType": "application",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/web:build",
+          "options": {
+            "outputPath": "dist/apps/safe-and-sound",
+            "index": "apps/safe-and-sound/src/index.html",
+            "main": "apps/safe-and-sound/src/main.ts",
+            "polyfills": "apps/safe-and-sound/src/polyfills.ts",
+            "tsConfig": "apps/safe-and-sound/tsconfig.app.json",
+            "assets": [
+              "apps/safe-and-sound/src/favicon.ico",
+              "apps/safe-and-sound/src/assets"
+            ],
+            "styles": ["apps/safe-and-sound/src/styles.css"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/safe-and-sound/src/environments/environment.ts",
+                  "with": "apps/safe-and-sound/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "safe-and-sound:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "safe-and-sound:build:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/safe-and-sound/tsconfig.app.json",
+              "apps/safe-and-sound/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/safe-and-sound/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/safe-and-sound/jest.config.js",
+            "tsConfig": "apps/safe-and-sound/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/safe-and-sound/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "safe-and-sound-e2e": {
+      "root": "apps/safe-and-sound-e2e",
+      "sourceRoot": "apps/safe-and-sound-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/safe-and-sound-e2e/cypress.json",
+            "tsConfig": "apps/safe-and-sound-e2e/tsconfig.e2e.json",
+            "devServerTarget": "safe-and-sound:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "safe-and-sound:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": ["apps/safe-and-sound-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/safe-and-sound-e2e/**/*"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/web"
+  },
+  "schematics": {
+    "@nrwl/workspace": {
+      "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/cypress": {
+      "cypress-project": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/react": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/next": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/web": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/node": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/nx-plugin": {
+      "plugin": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/nest": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/express": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "safe-and-sound"
+}
