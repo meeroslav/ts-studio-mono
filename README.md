@@ -1,4 +1,4 @@
-# Safensound
+# Safensound - TS rhythm mono repo
 
 This project was generated using [Nx](https://nx.dev).
 
